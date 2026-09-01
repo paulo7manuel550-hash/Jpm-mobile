@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -18,7 +19,6 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
     }
 
     .app {
@@ -27,22 +27,20 @@
       min-height: 100vh;
       background: white;
       padding: 30px 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
 
     .logo {
       text-align: center;
       font-size: 48px;
       font-weight: bold;
+      margin-top: 40px;
       margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
       color: #666;
-      margin-bottom: 35px;
+      margin-bottom: 40px;
     }
 
     h1 {
@@ -76,9 +74,16 @@
       margin-top: 5px;
     }
 
-    .register {
+    .primary {
       background: #111;
       color: white;
+    }
+
+    .secondary {
+      background: white;
+      color: #111;
+      border: 1px solid #ddd;
+      margin-top: 12px;
     }
 
     .status {
@@ -88,6 +93,80 @@
       color: #555;
       min-height: 20px;
     }
+
+    .hidden {
+      display: none;
+    }
+
+    .home {
+      padding-top: 20px;
+    }
+
+    .home-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .home-logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .logout {
+      width: auto;
+      padding: 9px 14px;
+      margin: 0;
+      background: #f1f1f1;
+      color: #111;
+    }
+
+    .welcome {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .post-box {
+      margin-top: 25px;
+      padding: 18px;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    .post {
+      margin-top: 20px;
+      padding: 18px;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      background: #fafafa;
+    }
+
+    .post-author {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .post-content {
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .post-date {
+      color: #888;
+      font-size: 12px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -95,59 +174,213 @@
 
   <main class="app">
 
-    <div class="logo">JPM</div>
+    <!-- LOGIN -->
+    <section id="loginScreen">
 
-    <p class="subtitle">Conectando pessoas</p>
+      <div class="logo">JPM</div>
 
-    <h1>Cria a tua conta</h1>
+      <p class="subtitle">Conectando pessoas</p>
 
-    <p class="description">
-      Entra na JPM e começa a fazer parte da nossa comunidade.
-    </p>
+      <h1>Entra na tua conta</h1>
 
-    <input
-      type="text"
-      id="name"
-      placeholder="Nome completo"
-    >
+      <p class="description">
+        Bem-vindo de volta à comunidade JPM.
+      </p>
 
-    <input
-      type="tel"
-      id="phone"
-      placeholder="Número de telefone"
-    >
+      <input
+        type="tel"
+        id="loginPhone"
+        placeholder="Número de telefone"
+      >
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Palavra-passe"
-    >
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Palavra-passe"
+      >
 
-    <button class="register" onclick="registerUser()">
-      Criar conta
-    </button>
+      <button class="primary" onclick="loginUser()">
+        Entrar
+      </button>
 
-    <div class="status" id="status"></div>
+      <button class="secondary" onclick="showRegister()">
+        Criar nova conta
+      </button>
+
+      <div class="status" id="loginStatus"></div>
+
+    </section>
+
+
+    <!-- CRIAR CONTA -->
+    <section id="registerScreen" class="hidden">
+
+      <div class="logo">JPM</div>
+
+      <p class="subtitle">Conectando pessoas</p>
+
+      <h1>Cria a tua conta</h1>
+
+      <p class="description">
+        Entra na JPM e começa a fazer parte da nossa comunidade.
+      </p>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Nome completo"
+      >
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Número de telefone"
+      >
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Palavra-passe"
+      >
+
+      <button class="primary" onclick="registerUser()">
+        Criar conta
+      </button>
+
+      <button class="secondary" onclick="showLogin()">
+        Já tenho uma conta
+      </button>
+
+      <div class="status" id="registerStatus"></div>
+
+    </section>
+
+
+    <!-- PÁGINA INICIAL -->
+    <section id="homeScreen" class="hidden home">
+
+      <div class="home-header">
+
+        <div class="home-logo">
+          JPM
+        </div>
+
+        <button class="logout" onclick="logout()">
+          Sair
+        </button>
+
+      </div>
+
+      <h1 class="welcome">
+        Olá, <span id="userName"></span>! 👋
+      </h1>
+
+      <p class="description">
+        Bem-vindo à JPM Mobile.
+      </p>
+
+      <div class="post-box">
+
+        <h2>O que estás a pensar?</h2>
+
+        <br>
+
+        <textarea
+          id="postContent"
+          placeholder="Partilha alguma coisa com a comunidade..."
+        ></textarea>
+
+        <button class="primary" onclick="createPost()">
+          Publicar
+        </button>
+
+        <div class="status" id="postStatus"></div>
+
+      </div>
+
+      <div id="postsContainer"></div>
+
+    </section>
 
   </main>
 
+
   <script>
-    const API_URL = "https://jpm-backend-1.onrender.com";
+
+    const API_URL =
+      "https://jpm-backend-1.onrender.com";
+
+    let currentUser = null;
+
+
+    function showLogin() {
+
+      document
+        .getElementById("loginScreen")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("registerScreen")
+        .classList.add("hidden");
+
+      document
+        .getElementById("homeScreen")
+        .classList.add("hidden");
+    }
+
+
+    function showRegister() {
+
+      document
+        .getElementById("loginScreen")
+        .classList.add("hidden");
+
+      document
+        .getElementById("registerScreen")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("homeScreen")
+        .classList.add("hidden");
+    }
+
 
     async function registerUser() {
 
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const password = document.getElementById("password").value;
+      const name =
+        document.getElementById("name").value.trim();
 
-      const status = document.getElementById("status");
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const status =
+        document.getElementById("registerStatus");
+
 
       if (!name || !phone || !password) {
-        status.textContent = "Preenche todos os campos.";
+
+        status.textContent =
+          "Preenche todos os campos.";
+
         return;
       }
 
-      status.textContent = "A criar a conta...";
+
+      if (password.length < 6) {
+
+        status.textContent =
+          "A palavra-passe deve ter pelo menos 6 caracteres.";
+
+        return;
+      }
+
+
+      status.textContent =
+        "A criar a conta...";
+
 
       try {
 
@@ -155,9 +388,11 @@
           `${API_URL}/api/register`,
           {
             method: "POST",
+
             headers: {
               "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
               name,
               phone,
@@ -166,13 +401,36 @@
           }
         );
 
-        const data = await response.json();
+
+        const data =
+          await response.json();
+
 
         if (data.success) {
-          status.textContent = "Conta criada com sucesso! 🎉";
+
+          status.textContent =
+            "Conta criada com sucesso! 🎉";
+
+
+          document.getElementById("name").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("password").value = "";
+
+
+          setTimeout(() => {
+
+            showLogin();
+
+          }, 1200);
+
+
         } else {
-          status.textContent = data.message;
+
+          status.textContent =
+            data.message;
+
         }
+
 
       } catch (error) {
 
@@ -180,7 +438,310 @@
           "Não foi possível contactar o servidor.";
 
       }
+
     }
+
+
+    async function loginUser() {
+
+      const phone =
+        document.getElementById("loginPhone").value.trim();
+
+      const password =
+        document.getElementById("loginPassword").value;
+
+      const status =
+        document.getElementById("loginStatus");
+
+
+      if (!phone || !password) {
+
+        status.textContent =
+          "Preenche o telefone e a palavra-passe.";
+
+        return;
+      }
+
+
+      status.textContent =
+        "A entrar...";
+
+
+      try {
+
+        const response = await fetch(
+          `${API_URL}/api/login`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              phone,
+              password
+            })
+          }
+        );
+
+
+        const data =
+          await response.json();
+
+
+        if (data.success) {
+
+          currentUser = data.user;
+
+
+          document.getElementById("userName").textContent =
+            currentUser.name;
+
+
+          document.getElementById("loginPhone").value = "";
+
+          document.getElementById("loginPassword").value = "";
+
+
+          document
+            .getElementById("loginScreen")
+            .classList.add("hidden");
+
+
+          document
+            .getElementById("registerScreen")
+            .classList.add("hidden");
+
+
+          document
+            .getElementById("homeScreen")
+            .classList.remove("hidden");
+
+
+          status.textContent = "";
+
+
+          loadPosts();
+
+
+        } else {
+
+          status.textContent =
+            data.message;
+
+        }
+
+
+      } catch (error) {
+
+        status.textContent =
+          "Não foi possível contactar o servidor.";
+
+      }
+
+    }
+
+
+    async function createPost() {
+
+      const content =
+        document.getElementById("postContent")
+        .value
+        .trim();
+
+
+      const status =
+        document.getElementById("postStatus");
+
+
+      if (!currentUser) {
+
+        status.textContent =
+          "Faz login primeiro.";
+
+        return;
+      }
+
+
+      if (!content) {
+
+        status.textContent =
+          "Escreve alguma coisa antes de publicar.";
+
+        return;
+      }
+
+
+      status.textContent =
+        "A publicar...";
+
+
+      try {
+
+        const response = await fetch(
+          `${API_URL}/api/posts`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              userId: currentUser.id,
+              content
+            })
+          }
+        );
+
+
+        const data =
+          await response.json();
+
+
+        if (data.success) {
+
+          document
+            .getElementById("postContent")
+            .value = "";
+
+
+          status.textContent =
+            "Publicação criada! 🎉";
+
+
+          loadPosts();
+
+
+        } else {
+
+          status.textContent =
+            data.message;
+
+        }
+
+
+      } catch (error) {
+
+        status.textContent =
+          "Não foi possível publicar.";
+
+      }
+
+    }
+
+
+    async function loadPosts() {
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_URL}/api/posts`
+          );
+
+
+        const data =
+          await response.json();
+
+
+        const container =
+          document.getElementById("postsContainer");
+
+
+        container.innerHTML = "";
+
+
+        if (!data.posts ||
+            data.posts.length === 0) {
+
+          container.innerHTML =
+            "<p style='text-align:center;margin-top:30px;color:#777;'>Ainda não existem publicações.</p>";
+
+          return;
+        }
+
+
+        data.posts.forEach(post => {
+
+          const article =
+            document.createElement("article");
+
+
+          article.className =
+            "post";
+
+
+          article.innerHTML = `
+
+            <div class="post-author">
+              ${escapeHTML(post.author)}
+            </div>
+
+            <div class="post-content">
+              ${escapeHTML(post.content)}
+            </div>
+
+            <div class="post-date">
+              ${new Date(post.createdAt)
+                .toLocaleString("pt-PT")}
+            </div>
+
+          `;
+
+
+          container.appendChild(article);
+
+        });
+
+
+      } catch (error) {
+
+        console.log(
+          "Erro ao carregar publicações."
+        );
+
+      }
+
+    }
+
+
+    function escapeHTML(text) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent =
+        text;
+
+      return div.innerHTML;
+
+    }
+
+
+    function logout() {
+
+      currentUser = null;
+
+
+      document
+        .getElementById("homeScreen")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("loginScreen")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("loginStatus")
+        .textContent =
+        "Sessão terminada.";
+
+    }
+
   </script>
 
 </body>
