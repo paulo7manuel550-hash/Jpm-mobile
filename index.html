@@ -15,7 +15,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #f4f6f8;
+      background: #eef1f5;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -25,53 +25,79 @@
       width: 100%;
       max-width: 430px;
       min-height: 100vh;
-      background: white;
-      padding: 30px 22px;
+      background: #fff;
+      position: relative;
+      padding-bottom: 75px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* LOGIN / REGISTO */
+
+    .auth {
+      padding: 45px 22px;
     }
 
     .logo {
       text-align: center;
-      font-size: 48px;
-      font-weight: bold;
-      margin-top: 40px;
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -3px;
       margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
-      color: #666;
-      margin-bottom: 40px;
+      color: #777;
+      margin-bottom: 42px;
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 27px;
       margin-bottom: 10px;
     }
 
     .description {
       color: #666;
-      margin-bottom: 25px;
       line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 16px;
+      outline: none;
+      font-family: inherit;
     }
 
     input {
-      width: 100%;
-      padding: 15px;
       margin-bottom: 14px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #111;
     }
 
     button {
-      width: 100%;
-      padding: 15px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      padding: 15px;
+      width: 100%;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 5px;
     }
 
     .primary {
@@ -88,207 +114,295 @@
 
     .status {
       text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 18px;
       color: #555;
       min-height: 20px;
+      font-size: 14px;
     }
 
-    .hidden {
-      display: none;
-    }
+    /* APP */
 
-    .home {
-      padding-top: 20px;
-    }
-
-    .home-header {
+    .topbar {
+      height: 65px;
+      border-bottom: 1px solid #eee;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 5;
     }
 
-    .home-logo {
-      font-size: 28px;
+    .top-logo {
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .top-title {
+      font-size: 18px;
       font-weight: bold;
     }
 
-    .logout {
-      width: auto;
-      padding: 9px 14px;
-      margin: 0;
-      background: #f1f1f1;
-      color: #111;
+    .content {
+      padding: 22px 18px;
     }
+
+    /* HOME */
 
     .welcome {
       font-size: 25px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .post-box {
-      margin-top: 25px;
-      padding: 18px;
-      border: 1px solid #ddd;
-      border-radius: 14px;
+    .composer {
+      border: 1px solid #e5e5e5;
+      border-radius: 15px;
+      padding: 17px;
+      margin-top: 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.04);
     }
 
-    textarea {
-      width: 100%;
-      min-height: 110px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 16px;
-      resize: vertical;
+    .composer h2 {
+      font-size: 18px;
+      margin-bottom: 13px;
+    }
+
+    .composer button {
+      margin-top: 12px;
     }
 
     .post {
       margin-top: 20px;
-      padding: 18px;
-      border: 1px solid #eee;
-      border-radius: 14px;
-      background: #fafafa;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
     }
 
-    .post-author {
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      background: #111;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: bold;
-      margin-bottom: 8px;
+    }
+
+    .author {
+      font-weight: bold;
     }
 
     .post-content {
-      color: #333;
       line-height: 1.5;
+      color: #333;
     }
 
     .post-date {
-      color: #888;
+      color: #999;
       font-size: 12px;
       margin-top: 10px;
+    }
+
+    /* PROFILE */
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 95px;
+      height: 95px;
+      background: #111;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 35px;
+      font-weight: bold;
+      margin: 15px auto;
+    }
+
+    .profile-name {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .profile-phone {
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 45px;
+      margin: 25px 0;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .stat span {
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 430px;
+      height: 68px;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: #555;
+      width: 20%;
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    .nav-btn span {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+
+    .nav-btn.active {
+      color: #111;
+      font-weight: bold;
+    }
+
+    .publish-nav {
+      font-size: 27px !important;
+    }
+
+    .empty {
+      text-align: center;
+      color: #888;
+      margin-top: 30px;
     }
   </style>
 </head>
 
 <body>
 
-  <main class="app">
+<div class="app">
 
-    <!-- LOGIN -->
-    <section id="loginScreen">
+  <!-- LOGIN -->
+  <section id="loginScreen" class="auth">
 
-      <div class="logo">JPM</div>
+    <div class="logo">JPM</div>
+    <p class="subtitle">Conectando pessoas</p>
 
-      <p class="subtitle">Conectando pessoas</p>
+    <h1>Entra na tua conta</h1>
 
-      <h1>Entra na tua conta</h1>
+    <p class="description">
+      Bem-vindo de volta à comunidade JPM.
+    </p>
 
-      <p class="description">
-        Bem-vindo de volta à comunidade JPM.
-      </p>
+    <input id="loginPhone" type="tel"
+           placeholder="Número de telefone">
 
-      <input
-        type="tel"
-        id="loginPhone"
-        placeholder="Número de telefone"
-      >
+    <input id="loginPassword" type="password"
+           placeholder="Palavra-passe">
 
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Palavra-passe"
-      >
+    <button class="primary" onclick="loginUser()">
+      Entrar
+    </button>
 
-      <button class="primary" onclick="loginUser()">
-        Entrar
-      </button>
+    <button class="secondary" onclick="showRegister()">
+      Criar nova conta
+    </button>
 
-      <button class="secondary" onclick="showRegister()">
-        Criar nova conta
-      </button>
+    <div class="status" id="loginStatus"></div>
 
-      <div class="status" id="loginStatus"></div>
-
-    </section>
+  </section>
 
 
-    <!-- CRIAR CONTA -->
-    <section id="registerScreen" class="hidden">
+  <!-- REGISTO -->
+  <section id="registerScreen" class="auth hidden">
 
-      <div class="logo">JPM</div>
+    <div class="logo">JPM</div>
+    <p class="subtitle">Conectando pessoas</p>
 
-      <p class="subtitle">Conectando pessoas</p>
+    <h1>Cria a tua conta</h1>
 
-      <h1>Cria a tua conta</h1>
+    <p class="description">
+      Entra na JPM e começa a fazer parte da nossa comunidade.
+    </p>
 
-      <p class="description">
-        Entra na JPM e começa a fazer parte da nossa comunidade.
-      </p>
+    <input id="name" type="text"
+           placeholder="Nome completo">
 
-      <input
-        type="text"
-        id="name"
-        placeholder="Nome completo"
-      >
+    <input id="phone" type="tel"
+           placeholder="Número de telefone">
 
-      <input
-        type="tel"
-        id="phone"
-        placeholder="Número de telefone"
-      >
+    <input id="password" type="password"
+           placeholder="Palavra-passe">
 
-      <input
-        type="password"
-        id="password"
-        placeholder="Palavra-passe"
-      >
+    <button class="primary" onclick="registerUser()">
+      Criar conta
+    </button>
 
-      <button class="primary" onclick="registerUser()">
-        Criar conta
-      </button>
+    <button class="secondary" onclick="showLogin()">
+      Já tenho uma conta
+    </button>
 
-      <button class="secondary" onclick="showLogin()">
-        Já tenho uma conta
-      </button>
+    <div class="status" id="registerStatus"></div>
 
-      <div class="status" id="registerStatus"></div>
-
-    </section>
+  </section>
 
 
-    <!-- PÁGINA INICIAL -->
-    <section id="homeScreen" class="hidden home">
+  <!-- APLICAÇÃO -->
+  <section id="appScreen" class="hidden">
 
-      <div class="home-header">
+    <header class="topbar">
+      <div class="top-logo">JPM</div>
+      <div class="top-title" id="pageTitle">Início</div>
+      <div>•••</div>
+    </header>
 
-        <div class="home-logo">
-          JPM
-        </div>
 
-        <button class="logout" onclick="logout()">
-          Sair
-        </button>
-
-      </div>
+    <!-- INÍCIO -->
+    <div id="homePage" class="content">
 
       <h1 class="welcome">
         Olá, <span id="userName"></span>! 👋
       </h1>
 
       <p class="description">
-        Bem-vindo à JPM Mobile.
+        O que está a acontecer na JPM?
       </p>
 
-      <div class="post-box">
+      <div class="composer">
 
         <h2>O que estás a pensar?</h2>
 
-        <br>
-
-        <textarea
-          id="postContent"
-          placeholder="Partilha alguma coisa com a comunidade..."
-        ></textarea>
+        <textarea id="postContent"
+          placeholder="Partilha alguma coisa com a comunidade..."></textarea>
 
         <button class="primary" onclick="createPost()">
           Publicar
@@ -300,449 +414,688 @@
 
       <div id="postsContainer"></div>
 
-    </section>
-
-  </main>
+    </div>
 
 
-  <script>
+    <!-- PERFIL -->
+    <div id="profilePage" class="content hidden">
 
-    const API_URL =
-      "https://jpm-backend-1.onrender.com";
+      <div class="profile">
 
-    let currentUser = null;
+        <div class="profile-avatar" id="profileAvatar">
+          J
+        </div>
 
+        <div class="profile-name" id="profileName">
+          Utilizador
+        </div>
 
-    function showLogin() {
+        <div class="profile-phone" id="profilePhone">
+          -
+        </div>
 
-      document
-        .getElementById("loginScreen")
-        .classList.remove("hidden");
+        <div class="stats">
 
-      document
-        .getElementById("registerScreen")
-        .classList.add("hidden");
+          <div class="stat">
+            <strong id="postCount">0</strong>
+            <span>Publicações</span>
+          </div>
 
-      document
-        .getElementById("homeScreen")
-        .classList.add("hidden");
-    }
+          <div class="stat">
+            <strong>0</strong>
+            <span>Seguidores</span>
+          </div>
 
+          <div class="stat">
+            <strong>0</strong>
+            <span>A seguir</span>
+          </div>
 
-    function showRegister() {
+        </div>
 
-      document
-        .getElementById("loginScreen")
-        .classList.add("hidden");
+        <button class="secondary" onclick="logout()">
+          Sair da conta
+        </button>
 
-      document
-        .getElementById("registerScreen")
-        .classList.remove("hidden");
+      </div>
 
-      document
-        .getElementById("homeScreen")
-        .classList.add("hidden");
-    }
-
-
-    async function registerUser() {
-
-      const name =
-        document.getElementById("name").value.trim();
-
-      const phone =
-        document.getElementById("phone").value.trim();
-
-      const password =
-        document.getElementById("password").value;
-
-      const status =
-        document.getElementById("registerStatus");
+    </div>
 
 
-      if (!name || !phone || !password) {
+    <!-- EXPLORAR -->
+    <div id="explorePage" class="content hidden">
 
-        status.textContent =
-          "Preenche todos os campos.";
+      <h1>Explorar 🔍</h1>
 
-        return;
+      <p class="description">
+        Descobre pessoas e publicações na JPM.
+      </p>
+
+      <div class="empty">
+        Em breve teremos a pesquisa JPM.
+      </div>
+
+    </div>
+
+
+    <!-- NOTIFICAÇÕES -->
+    <div id="notificationsPage" class="content hidden">
+
+      <h1>Notificações 🔔</h1>
+
+      <div class="empty">
+        Ainda não tens notificações.
+      </div>
+
+    </div>
+
+
+    <!-- MENU -->
+    <nav class="bottom-nav">
+
+      <button class="nav-btn active"
+              onclick="showPage('home')">
+        <span>🏠</span>
+        Início
+      </button>
+
+      <button class="nav-btn"
+              onclick="showPage('explore')">
+        <span>🔍</span>
+        Explorar
+      </button>
+
+      <button class="nav-btn"
+              onclick="focusPublisher()">
+        <span class="publish-nav">＋</span>
+        Publicar
+      </button>
+
+      <button class="nav-btn"
+              onclick="showPage('notifications')">
+        <span>🔔</span>
+        Alertas
+      </button>
+
+      <button class="nav-btn"
+              onclick="showPage('profile')">
+        <span>👤</span>
+        Perfil
+      </button>
+
+    </nav>
+
+  </section>
+
+</div>
+
+
+<script>
+
+const API_URL =
+  "https://jpm-backend-1.onrender.com";
+
+let currentUser = null;
+
+
+/* ---------- TELAS ---------- */
+
+function showLogin() {
+
+  document.getElementById("loginScreen")
+    .classList.remove("hidden");
+
+  document.getElementById("registerScreen")
+    .classList.add("hidden");
+
+  document.getElementById("appScreen")
+    .classList.add("hidden");
+}
+
+
+function showRegister() {
+
+  document.getElementById("loginScreen")
+    .classList.add("hidden");
+
+  document.getElementById("registerScreen")
+    .classList.remove("hidden");
+
+  document.getElementById("appScreen")
+    .classList.add("hidden");
+}
+
+
+/* ---------- REGISTO ---------- */
+
+async function registerUser() {
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const status =
+    document.getElementById("registerStatus");
+
+
+  if (!name || !phone || !password) {
+
+    status.textContent =
+      "Preenche todos os campos.";
+
+    return;
+  }
+
+
+  if (password.length < 6) {
+
+    status.textContent =
+      "A palavra-passe deve ter pelo menos 6 caracteres.";
+
+    return;
+  }
+
+
+  status.textContent =
+    "A criar a conta...";
+
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/register`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          name,
+          phone,
+          password
+        })
       }
+    );
 
 
-      if (password.length < 6) {
+    const data =
+      await response.json();
 
-        status.textContent =
-          "A palavra-passe deve ter pelo menos 6 caracteres.";
 
-        return;
-      }
-
+    if (data.success) {
 
       status.textContent =
-        "A criar a conta...";
+        "Conta criada com sucesso! 🎉";
 
+      document.getElementById("name").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("password").value = "";
 
-      try {
+      setTimeout(showLogin, 1000);
 
-        const response = await fetch(
-          `${API_URL}/api/register`,
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-              name,
-              phone,
-              password
-            })
-          }
-        );
-
-
-        const data =
-          await response.json();
-
-
-        if (data.success) {
-
-          status.textContent =
-            "Conta criada com sucesso! 🎉";
-
-
-          document.getElementById("name").value = "";
-          document.getElementById("phone").value = "";
-          document.getElementById("password").value = "";
-
-
-          setTimeout(() => {
-
-            showLogin();
-
-          }, 1200);
-
-
-        } else {
-
-          status.textContent =
-            data.message;
-
-        }
-
-
-      } catch (error) {
-
-        status.textContent =
-          "Não foi possível contactar o servidor.";
-
-      }
-
-    }
-
-
-    async function loginUser() {
-
-      const phone =
-        document.getElementById("loginPhone").value.trim();
-
-      const password =
-        document.getElementById("loginPassword").value;
-
-      const status =
-        document.getElementById("loginStatus");
-
-
-      if (!phone || !password) {
-
-        status.textContent =
-          "Preenche o telefone e a palavra-passe.";
-
-        return;
-      }
-
+    } else {
 
       status.textContent =
-        "A entrar...";
-
-
-      try {
-
-        const response = await fetch(
-          `${API_URL}/api/login`,
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-              phone,
-              password
-            })
-          }
-        );
-
-
-        const data =
-          await response.json();
-
-
-        if (data.success) {
-
-          currentUser = data.user;
-
-
-          document.getElementById("userName").textContent =
-            currentUser.name;
-
-
-          document.getElementById("loginPhone").value = "";
-
-          document.getElementById("loginPassword").value = "";
-
-
-          document
-            .getElementById("loginScreen")
-            .classList.add("hidden");
-
-
-          document
-            .getElementById("registerScreen")
-            .classList.add("hidden");
-
-
-          document
-            .getElementById("homeScreen")
-            .classList.remove("hidden");
-
-
-          status.textContent = "";
-
-
-          loadPosts();
-
-
-        } else {
-
-          status.textContent =
-            data.message;
-
-        }
-
-
-      } catch (error) {
-
-        status.textContent =
-          "Não foi possível contactar o servidor.";
-
-      }
+        data.message;
 
     }
 
+  } catch (error) {
 
-    async function createPost() {
+    status.textContent =
+      "Não foi possível contactar o servidor.";
 
-      const content =
-        document.getElementById("postContent")
-        .value
-        .trim();
-
-
-      const status =
-        document.getElementById("postStatus");
+  }
+}
 
 
-      if (!currentUser) {
+/* ---------- LOGIN ---------- */
 
-        status.textContent =
-          "Faz login primeiro.";
+async function loginUser() {
 
-        return;
+  const phone =
+    document.getElementById("loginPhone").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const status =
+    document.getElementById("loginStatus");
+
+
+  if (!phone || !password) {
+
+    status.textContent =
+      "Preenche o telefone e a palavra-passe.";
+
+    return;
+  }
+
+
+  status.textContent =
+    "A entrar...";
+
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/login`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          phone,
+          password
+        })
       }
+    );
 
 
-      if (!content) {
+    const data =
+      await response.json();
 
-        status.textContent =
-          "Escreve alguma coisa antes de publicar.";
 
-        return;
-      }
-
+    if (!data.success) {
 
       status.textContent =
-        "A publicar...";
+        data.message;
 
-
-      try {
-
-        const response = await fetch(
-          `${API_URL}/api/posts`,
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-              userId: currentUser.id,
-              content
-            })
-          }
-        );
-
-
-        const data =
-          await response.json();
-
-
-        if (data.success) {
-
-          document
-            .getElementById("postContent")
-            .value = "";
-
-
-          status.textContent =
-            "Publicação criada! 🎉";
-
-
-          loadPosts();
-
-
-        } else {
-
-          status.textContent =
-            data.message;
-
-        }
-
-
-      } catch (error) {
-
-        status.textContent =
-          "Não foi possível publicar.";
-
-      }
-
+      return;
     }
 
 
-    async function loadPosts() {
-
-      try {
-
-        const response =
-          await fetch(
-            `${API_URL}/api/posts`
-          );
+    currentUser =
+      data.user;
 
 
-        const data =
-          await response.json();
+    document.getElementById("userName")
+      .textContent =
+      currentUser.name;
 
 
-        const container =
-          document.getElementById("postsContainer");
+    document.getElementById("profileName")
+      .textContent =
+      currentUser.name;
 
 
-        container.innerHTML = "";
+    document.getElementById("profilePhone")
+      .textContent =
+      currentUser.phone;
 
 
-        if (!data.posts ||
-            data.posts.length === 0) {
-
-          container.innerHTML =
-            "<p style='text-align:center;margin-top:30px;color:#777;'>Ainda não existem publicações.</p>";
-
-          return;
-        }
+    document.getElementById("profileAvatar")
+      .textContent =
+      currentUser.name
+        .charAt(0)
+        .toUpperCase();
 
 
-        data.posts.forEach(post => {
-
-          const article =
-            document.createElement("article");
+    document.getElementById("loginPhone").value = "";
+    document.getElementById("loginPassword").value = "";
 
 
-          article.className =
-            "post";
+    document.getElementById("loginScreen")
+      .classList.add("hidden");
+
+    document.getElementById("registerScreen")
+      .classList.add("hidden");
+
+    document.getElementById("appScreen")
+      .classList.remove("hidden");
 
 
-          article.innerHTML = `
+    showPage("home");
 
-            <div class="post-author">
+    loadPosts();
+
+  } catch (error) {
+
+    status.textContent =
+      "Não foi possível contactar o servidor.";
+
+  }
+}
+
+
+/* ---------- PÁGINAS ---------- */
+
+function showPage(page) {
+
+  const pages = [
+    "homePage",
+    "profilePage",
+    "explorePage",
+    "notificationsPage"
+  ];
+
+
+  pages.forEach(id => {
+
+    document.getElementById(id)
+      .classList.add("hidden");
+
+  });
+
+
+  document.getElementById(
+    page + "Page"
+  ).classList.remove("hidden");
+
+
+  const titles = {
+    home: "Início",
+    profile: "Perfil",
+    explore: "Explorar",
+    notifications: "Notificações"
+  };
+
+
+  document.getElementById("pageTitle")
+    .textContent =
+    titles[page];
+
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(button =>
+      button.classList.remove("active")
+    );
+
+
+  const index = {
+    home: 0,
+    explore: 1,
+    notifications: 3,
+    profile: 4
+  };
+
+
+  if (index[page] !== undefined) {
+
+    document.querySelectorAll(".nav-btn")
+      [index[page]]
+      .classList.add("active");
+
+  }
+
+
+  if (page === "profile") {
+    updatePostCount();
+  }
+
+}
+
+
+function focusPublisher() {
+
+  showPage("home");
+
+  setTimeout(() => {
+
+    document.getElementById("postContent")
+      .focus();
+
+  }, 100);
+
+}
+
+
+/* ---------- PUBLICAR ---------- */
+
+async function createPost() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const content =
+    document.getElementById("postContent")
+      .value.trim();
+
+  const status =
+    document.getElementById("postStatus");
+
+
+  if (!content) {
+
+    status.textContent =
+      "Escreve alguma coisa antes de publicar.";
+
+    return;
+  }
+
+
+  status.textContent =
+    "A publicar...";
+
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/posts`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          userId: currentUser.id,
+          content
+        })
+      }
+    );
+
+
+    const data =
+      await response.json();
+
+
+    if (data.success) {
+
+      document.getElementById("postContent")
+        .value = "";
+
+      status.textContent =
+        "Publicado com sucesso! 🎉";
+
+      loadPosts();
+
+    } else {
+
+      status.textContent =
+        data.message;
+
+    }
+
+  } catch (error) {
+
+    status.textContent =
+      "Não foi possível publicar.";
+
+  }
+}
+
+
+/* ---------- FEED ---------- */
+
+async function loadPosts() {
+
+  try {
+
+    const response =
+      await fetch(
+        `${API_URL}/api/posts`
+      );
+
+
+    const data =
+      await response.json();
+
+
+    const container =
+      document.getElementById("postsContainer");
+
+
+    container.innerHTML = "";
+
+
+    if (!data.posts ||
+        data.posts.length === 0) {
+
+      container.innerHTML =
+        "<div class='empty'>Ainda não existem publicações.</div>";
+
+      updatePostCount();
+
+      return;
+    }
+
+
+    data.posts.forEach(post => {
+
+      const article =
+        document.createElement("article");
+
+
+      article.className =
+        "post";
+
+
+      const initial =
+        post.author
+          .charAt(0)
+          .toUpperCase();
+
+
+      article.innerHTML = `
+
+        <div class="post-header">
+
+          <div class="avatar">
+            ${escapeHTML(initial)}
+          </div>
+
+          <div>
+            <div class="author">
               ${escapeHTML(post.author)}
-            </div>
-
-            <div class="post-content">
-              ${escapeHTML(post.content)}
             </div>
 
             <div class="post-date">
               ${new Date(post.createdAt)
                 .toLocaleString("pt-PT")}
             </div>
+          </div>
 
-          `;
+        </div>
 
+        <div class="post-content">
+          ${escapeHTML(post.content)}
+        </div>
 
-          container.appendChild(article);
-
-        });
-
-
-      } catch (error) {
-
-        console.log(
-          "Erro ao carregar publicações."
-        );
-
-      }
-
-    }
+      `;
 
 
-    function escapeHTML(text) {
+      container.appendChild(article);
 
-      const div =
-        document.createElement("div");
-
-      div.textContent =
-        text;
-
-      return div.innerHTML;
-
-    }
+    });
 
 
-    function logout() {
-
-      currentUser = null;
+    updatePostCount();
 
 
-      document
-        .getElementById("homeScreen")
-        .classList.add("hidden");
+  } catch (error) {
+
+    console.log(
+      "Erro ao carregar publicações."
+    );
+
+  }
+}
 
 
-      document
-        .getElementById("loginScreen")
-        .classList.remove("hidden");
+/* ---------- CONTADOR ---------- */
+
+async function updatePostCount() {
+
+  if (!currentUser) return;
 
 
-      document
-        .getElementById("loginStatus")
-        .textContent =
-        "Sessão terminada.";
+  try {
 
-    }
+    const response =
+      await fetch(
+        `${API_URL}/api/posts`
+      );
 
-  </script>
+
+    const data =
+      await response.json();
+
+
+    const count =
+      data.posts.filter(
+        post =>
+          post.userId === currentUser.id
+      ).length;
+
+
+    document.getElementById("postCount")
+      .textContent = count;
+
+  } catch (error) {
+
+    console.log("Erro no contador.");
+
+  }
+}
+
+
+/* ---------- SEGURANÇA HTML ---------- */
+
+function escapeHTML(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
+}
+
+
+/* ---------- SAIR ---------- */
+
+function logout() {
+
+  currentUser = null;
+
+  document.getElementById("appScreen")
+    .classList.add("hidden");
+
+  document.getElementById("loginScreen")
+    .classList.remove("hidden");
+
+  document.getElementById("loginStatus")
+    .textContent =
+    "Sessão terminada.";
+
+}
+
+</script>
 
 </body>
 </html>
