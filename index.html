@@ -989,12 +989,48 @@ async function loadPosts() {
 </div>
 
 <div class="post-actions">
+
   <button
     onclick="likePost(${post.id}, this)"
     class="like-button"
   >
     ❤️ <span>${post.likes || 0}</span>
   </button>
+
+  <button
+    onclick="toggleComments(${post.id})"
+    class="comment-button"
+  >
+    💬 Comentários
+  </button>
+
+</div>
+
+<div
+  id="comments-${post.id}"
+  class="comments-box hidden"
+>
+
+  <div id="comment-list-${post.id}">
+    A carregar comentários...
+  </div>
+
+  <div class="comment-form">
+
+    <input
+      id="comment-input-${post.id}"
+      type="text"
+      placeholder="Escreva um comentário..."
+    />
+
+    <button
+      onclick="addComment(${post.id})"
+    >
+      Enviar
+    </button>
+
+  </div>
+
 </div>
 
           <div>
@@ -1074,7 +1110,111 @@ async function likePost(postId, button) {
     alert("Erro de conexão com o servidor.");
   }
 }
+/* ---------- COMENTÁRIOS ---------- */
 
+async function toggleComments(postId) {
+
+  const box = document.getElementById(
+    `comments-${postId}`
+  );
+
+  box.classList.toggle("hidden");
+
+  if (!box.classList.contains("hidden")) {
+    await loadComments(postId);
+  }
+}
+
+
+async function loadComments(postId) {
+
+  const list = document.getElementById(
+    `comment-list-${postId}`
+  );
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/comments/${postId}`
+    );
+
+    const data = await response.json();
+
+    if (!data.comments || data.comments.length === 0) {
+      list.innerHTML = "Ainda não há comentários.";
+      return;
+    }
+
+    list.innerHTML = data.comments.map(comment => `
+      <div class="comment">
+        <strong>${escapeHTML(comment.author)}</strong>
+        <div>${escapeHTML(comment.content)}</div>
+      </div>
+    `).join("");
+
+  } catch (error) {
+
+    console.log("Erro ao carregar comentários.");
+
+    list.innerHTML =
+      "Não foi possível carregar os comentários.";
+  }
+}
+
+
+async function addComment(postId) {
+
+  if (!currentUser) {
+    alert("Entre na sua conta para comentar.");
+    return;
+  }
+
+  const input = document.getElementById(
+    `comment-input-${postId}`
+  );
+
+  const content = input.value.trim();
+
+  if (!content) {
+    alert("Escreva um comentário.");
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/comments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          postId,
+          userId: currentUser.id,
+          content
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+      alert(data.message || "Erro ao comentar.");
+      return;
+    }
+
+    input.value = "";
+
+    await loadComments(postId);
+
+  } catch (error) {
+
+    console.log("Erro ao publicar comentário:", error);
+
+    alert("Erro de conexão com o servidor.");
+  }
+}
 /* ---------- CONTADOR ---------- */
 
 async function updatePostCount() {
