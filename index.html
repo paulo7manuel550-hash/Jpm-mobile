@@ -1110,14 +1110,15 @@ async function likePost(postId, button) {
 
     button.querySelector("span").textContent =
       data.likes;
-
   } catch (error) {
 
     console.log("Erro ao curtir:", error);
 
     alert("Erro de conexão com o servidor.");
     
-  }/* ---------- SEGUIR UTILIZADORES ---------- */
+  }
+
+} /* ---------- SEGUIR UTILIZADORES ---------- */
 
 async function loadUsersToFollow() {
 
