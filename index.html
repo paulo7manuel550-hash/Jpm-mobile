@@ -984,9 +984,18 @@ async function loadPosts() {
 
         <div class="post-header">
 
-          <div class="avatar">
-            ${escapeHTML(initial)}
-          </div>
+        <div class="post-content">
+  ${escapeHTML(post.content)}
+</div>
+
+<div class="post-actions">
+  <button
+    onclick="likePost(${post.id}, this)"
+    class="like-button"
+  >
+    ❤️ <span>${post.likes || 0}</span>
+  </button>
+</div>
 
           <div>
             <div class="author">
@@ -1024,7 +1033,47 @@ async function loadPosts() {
 
   }
 }
+/* ---------- CURTIDAS ---------- */
 
+async function likePost(postId, button) {
+
+  if (!currentUser) {
+    alert("Entre na sua conta para curtir.");
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/posts/${postId}/like`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userId: currentUser.id
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+      alert(data.message || "Não foi possível curtir.");
+      return;
+    }
+
+    button.querySelector("span").textContent =
+      data.likes;
+
+  } catch (error) {
+
+    console.log("Erro ao curtir:", error);
+
+    alert("Erro de conexão com o servidor.");
+  }
+}
 
 /* ---------- CONTADOR ---------- */
 
