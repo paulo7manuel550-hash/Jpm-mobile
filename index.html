@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -451,14 +452,6 @@
           </div>
 
         </div>
-        <button
-  class="secondary"
-  onclick="loadUsersToFollow()"
->
-  👤 Encontrar pessoas
-</button>
-        
-<div id="usersToFollow" class="hidden"></div>
 
         <button class="secondary" onclick="logout()">
           Sair da conta
@@ -934,138 +927,11 @@ async function createPost() {
 
   }
 }
-  
-/* ---------- ENCONTRAR PESSOAS ---------- */
 
-async function loadUsersToFollow() {
-
-  if (!currentUser) {
-    alert("Entra na tua conta primeiro.");
-    return;
-  }
-
-  const container =
-    document.getElementById("usersToFollow");
-
-  container.classList.remove("hidden");
-  container.innerHTML = "A carregar utilizadores...";
-
-  try {
-
-    const response =
-      await fetch(`${API_URL}/api/users`);
-
-    const data =
-      await response.json();
-
-    if (!data.success) {
-      container.innerHTML =
-        "Não foi possível carregar os utilizadores.";
-      return;
-    }
-
-    const users =
-      data.users.filter(
-        user => user.id !== currentUser.id
-      );
-
-    if (users.length === 0) {
-      container.innerHTML =
-        "Ainda não existem outros utilizadores.";
-      return;
-    }
-
-    container.innerHTML = "";
-
-    users.forEach(user => {
-
-      const div =
-        document.createElement("div");
-
-      div.className = "user-card";
-
-      div.innerHTML = `
-        <strong>${escapeHTML(user.name)}</strong>
-        <button
-          class="secondary"
-          onclick="toggleFollow(${user.id}, this)"
-        >
-          Seguir
-        </button>
-      `;
-
-      container.appendChild(div);
-
-    });
-
-  } catch (error) {
-
-    console.log(
-      "Erro ao carregar utilizadores:",
-      error
-    );
-
-    container.innerHTML =
-      "Erro de conexão com o servidor.";
-
-  }
-}
-
-/* ---------- SEGUIR UTILIZADORES ---------- */
-
-async function toggleFollow(userId, button) {
-
-  if (!currentUser) {
-    alert("Entra na tua conta primeiro.");
-    return;
-  }
-
-  button.disabled = true;
-
-  try {
-
-    const response = await fetch(
-      `${API_URL}/api/users/${userId}/follow`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          userId: currentUser.id
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if (!data.success) {
-      alert(data.message || "Não foi possível seguir este utilizador.");
-      button.disabled = false;
-      return;
-    }
-
-    button.textContent =
-      data.following ? "Seguindo" : "Seguir";
-
-  } catch (error) {
-
-    console.log(
-      "Erro ao seguir utilizador:",
-      error
-    );
-
-    alert("Erro de conexão com o servidor.");
-
-  }
-
-  button.disabled = false;
-}
 
 /* ---------- FEED ---------- */
 
 async function loadPosts() {
-
 
   try {
 
