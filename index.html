@@ -838,10 +838,10 @@ function showPage(page) {
 
   }
 
-
-  if (page === "profile") {
-    updatePostCount();
-  }
+if (page === "profile") {
+  updatePostCount();
+  loadFollowStats();
+}
 
 }
 
@@ -1406,7 +1406,60 @@ function escapeHTML(text) {
 
   return div.innerHTML;
 }
+  
+/* ---------- ESTATÍSTICAS DO PERFIL ---------- */
 
+async function loadFollowStats() {
+
+  if (!currentUser) {
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/users`
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+      return;
+    }
+
+    const user = data.users.find(
+      u => u.id === currentUser.id
+    );
+
+    if (!user) {
+      return;
+    }
+
+    const followersElement =
+      document.getElementById("followersCount");
+
+    const followingElement =
+      document.getElementById("followingCount");
+
+    if (followersElement) {
+      followersElement.textContent =
+        user.followersCount;
+    }
+
+    if (followingElement) {
+      followingElement.textContent =
+        user.followingCount;
+    }
+
+  } catch (error) {
+
+    console.log(
+      "Erro ao carregar estatísticas:",
+      error
+    );
+
+  }
+}
 
 /* ---------- SAIR ---------- */
 
