@@ -956,7 +956,7 @@ async function loadUsersToFollow() {
   try {
 
     const response =
-      await fetch(`${API_URL}/api/users`);
+  await fetch(`${API_URL}/api/users?userId=${currentUser.id}`);
 
     const data =
       await response.json();
@@ -987,18 +987,18 @@ async function loadUsersToFollow() {
 
       div.className = "user-card";
 
-      div.innerHTML = `
-        <strong>${escapeHTML(user.name)}</strong>
+  div.innerHTML = `
+  <strong>${escapeHTML(user.name)}</strong>
 
-        <button
-          class="secondary"
-          onclick="toggleFollow(${user.id}, this)"
-        >
-          Seguir
-        </button>
-      `;
+  <button
+    class="secondary"
+    onclick="toggleFollow(${user.id}, this)"
+  >
+    ${user.following ? "Seguindo ✓" : "Seguir"}
+  </button>
+`;
 
-      container.appendChild(div);
+container.appendChild(div);
 
     });
 
