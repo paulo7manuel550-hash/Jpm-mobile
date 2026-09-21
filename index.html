@@ -1244,8 +1244,13 @@ async function likePost(postId, button) {
       return;
     }
 
-    button.querySelector("span").textContent =
-      data.likes;
+  button.querySelector("span").textContent =
+  data.likes;
+
+button.classList.toggle(
+  "liked",
+  data.liked
+);
 
   } catch (error) {
 
