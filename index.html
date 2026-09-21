@@ -1248,6 +1248,9 @@ async function likePost(postId, button) {
   button.querySelector("span").textContent =
   data.likes;
 
+button.firstChild.textContent =
+  data.liked ? "❤️ Curtido " : "❤️ Curtir ";
+
 button.classList.toggle(
   "liked",
   data.liked
