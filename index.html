@@ -1080,9 +1080,9 @@ async function loadPosts() {
   try {
 
     const response =
-      await fetch(
-        `${API_URL}/api/posts`
-      );
+  await fetch(
+    `${API_URL}/api/posts?userId=${currentUser.id}`
+  );
 
 
     const data =
