@@ -1298,12 +1298,22 @@ async function loadComments(postId) {
       return;
     }
 
-    list.innerHTML = data.comments.map(comment => `
-      <div class="comment">
-        <strong>${escapeHTML(comment.author)}</strong>
-        <div>${escapeHTML(comment.content)}</div>
-      </div>
-    `).join("");
+  list.innerHTML = data.comments.map(comment => `
+  <div class="comment">
+
+    <strong>${escapeHTML(comment.author)}</strong>
+
+    <div>${escapeHTML(comment.content)}</div>
+
+    <button
+      onclick="likeComment(${comment.id}, this)"
+      class="comment-like-button"
+    >
+      ❤️ <span>0</span>
+    </button>
+
+  </div>
+`).join("");
 
   } catch (error) {
 
@@ -1313,7 +1323,56 @@ async function loadComments(postId) {
       "Não foi possível carregar os comentários.";
   }
 }
+async function likeComment(commentId, button) {
 
+  if (!currentUser) {
+    alert("Entre na sua conta para curtir o comentário.");
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/comments/${commentId}/like`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userId: currentUser.id
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+      alert(data.message || "Não foi possível curtir o comentário.");
+      return;
+    }
+
+    button.firstChild.textContent =
+  data.liked ? "❤️ Curtido " : "❤️ Curtir ";
+
+button.querySelector("span").textContent =
+  data.likes;
+
+button.classList.toggle(
+  "liked",
+  data.liked
+);
+
+  } catch (error) {
+
+    console.log(
+      "Erro ao curtir comentário:",
+      error
+    );
+
+    alert("Erro de conexão com o servidor.");
+  }
+}
 
 async function addComment(postId) {
 
