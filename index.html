@@ -1290,8 +1290,8 @@ async function loadComments(postId) {
   try {
 
     const response = await fetch(
-      `${API_URL}/api/comments/${postId}`
-    );
+  `${API_URL}/api/comments/${postId}?userId=${currentUser.id}`
+);
 
     const data = await response.json();
 
@@ -1308,11 +1308,12 @@ async function loadComments(postId) {
     <div>${escapeHTML(comment.content)}</div>
 
     <button
-      onclick="likeComment(${comment.id}, this)"
-      class="comment-like-button"
-    >
-      ❤️ <span>0</span>
-    </button>
+  onclick="likeComment(${comment.id}, this)"
+  class="comment-like-button"
+>
+  ${comment.liked ? "❤️ Curtido" : "❤️ Curtir"}
+  <span>${comment.likes || 0}</span>
+</button>
 
   </div>
 `).join("");
