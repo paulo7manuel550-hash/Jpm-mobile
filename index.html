@@ -1245,8 +1245,10 @@ async function likePost(postId, button) {
       return;
     }
 
-  button.querySelector("span").textContent =
-  data.likes;
+  button.innerHTML =
+  data.liked
+    ? `❤️ Curtido <span>${data.likes}</span>`
+    : `❤️ Curtir <span>${data.likes}</span>`;
 
 button.firstChild.textContent =
   data.liked ? "❤️ Curtido " : "❤️ Curtir ";
