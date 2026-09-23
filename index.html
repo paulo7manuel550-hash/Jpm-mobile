@@ -1378,14 +1378,11 @@ const response = await fetch(
     const data = await response.json();
     
 console.log("NOTIFICAÇÕES RECEBIDAS:", data);
-    if (
-      !data.success ||
-      !data.notifications ||
-      data.notifications.length === 0
-    ) {
-      list.innerHTML =
-  `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-      return;
+    if (!data.success) {
+  list.innerHTML =
+    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  return;
+}
     }
 
     list.className = "";
