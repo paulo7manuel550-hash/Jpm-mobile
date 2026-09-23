@@ -481,9 +481,22 @@
         Descobre pessoas e publicações na JPM.
       </p>
 
-      <div class="empty">
-        Em breve teremos a pesquisa JPM.
-      </div>
+      <div class="search-box">
+
+  <input
+    id="userSearchInput"
+    type="text"
+    placeholder="Pesquisar utilizador..."
+  />
+
+  <button onclick="searchUsers()">
+    🔍 Pesquisar
+  </button>
+
+</div>
+
+<div id="searchResults">
+</div>
 
     </div>
 
@@ -777,7 +790,70 @@ console.log("UTILIZADOR LOGADO:", currentUser);
 
   }
 }
+  
+async function searchUsers() {
 
+  const input =
+    document.getElementById("userSearchInput");
+
+  const results =
+    document.getElementById("searchResults");
+
+  const query =
+    input.value.trim();
+
+  if (!query) {
+    results.innerHTML =
+      "Digite um nome para pesquisar.";
+    return;
+  }
+
+  results.innerHTML =
+    "A pesquisar...";
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/users/search?q=${encodeURIComponent(query)}`
+    );
+
+    const data =
+      await response.json();
+
+    if (
+      !data.success ||
+      !data.users ||
+      data.users.length === 0
+    ) {
+      results.innerHTML =
+        "Nenhum utilizador encontrado.";
+      return;
+    }
+
+    results.innerHTML =
+      data.users.map(user => `
+        <div class="search-result">
+          <strong>${escapeHTML(user.name)}</strong>
+          <button
+            class="secondary"
+            onclick="toggleFollow(${user.id}, this)"
+          >
+            Seguir
+          </button>
+        </div>
+      `).join("");
+
+  } catch (error) {
+
+    console.log(
+      "Erro na pesquisa:",
+      error
+    );
+
+    results.innerHTML =
+      "Erro de conexão com o servidor.";
+  }
+}
 
 /* ---------- PÁGINAS ---------- */
 
