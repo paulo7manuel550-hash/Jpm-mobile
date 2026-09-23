@@ -1279,7 +1279,56 @@ async function toggleComments(postId) {
     await loadComments(postId);
   }
 }
+async function loadNotifications() {
 
+  const list = document.getElementById(
+    "notificationsList"
+  );
+
+  if (!currentUser) {
+    list.innerHTML =
+      "Entre na sua conta para ver as notificações.";
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/notifications?userId=${currentUser.id}`
+    );
+
+    const data = await response.json();
+
+    if (
+      !data.success ||
+      !data.notifications ||
+      data.notifications.length === 0
+    ) {
+      list.innerHTML =
+        "Ainda não tens notificações.";
+      return;
+    }
+
+    list.className = "";
+
+    list.innerHTML =
+      data.notifications.map(notification => `
+        <div class="notification-item">
+          🔔 ${escapeHTML(notification.message)}
+        </div>
+      `).join("");
+
+  } catch (error) {
+
+    console.log(
+      "Erro ao carregar notificações:",
+      error
+    );
+
+    list.innerHTML =
+      "Não foi possível carregar as notificações.";
+  }
+}
 
 async function loadComments(postId) {
 
