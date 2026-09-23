@@ -725,8 +725,9 @@ async function loginUser() {
     }
 
 
-    currentUser =
-      data.user;
+    currentUser = data.user;
+
+console.log("UTILIZADOR LOGADO:", currentUser);
 
 
     document.getElementById("userName")
@@ -1292,10 +1293,12 @@ async function loadNotifications() {
   }
 
   try {
+const userId = Number(currentUser.id);
 
-    const response = await fetch(
-      `${API_URL}/api/notifications?userId=${currentUser.id}`
-    );
+const response = await fetch(
+  `${API_URL}/api/notifications?userId=${userId}`
+);
+    
 
     const data = await response.json();
 
