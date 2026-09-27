@@ -1377,10 +1377,14 @@ const response = await fetch(
 
     const data = await response.json();
     
-console.log("NOTIFICAÇÕES RECEBIDAS:", data);
-    if (!data.success) {
+
+    if (
+  !data.success ||
+  !data.notifications ||
+  data.notifications.length === 0
+) {
   list.innerHTML =
-    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    "Ainda não tens notificações.";
   return;
 }
 
