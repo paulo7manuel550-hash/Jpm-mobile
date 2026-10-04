@@ -1373,6 +1373,8 @@ const userId = Number(currentUser.id);
 
 list.innerHTML = "ID DO UTILIZADOR: " + userId;
 
+return;
+
 const response = await fetch(
   `${API_URL}/api/notifications?userId=${userId}`
 );
