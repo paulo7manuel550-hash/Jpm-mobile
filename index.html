@@ -1371,6 +1371,8 @@ async function loadNotifications() {
   try {
 const userId = Number(currentUser.id);
 
+list.innerHTML = "ID DO UTILIZADOR: " + userId;
+
 const response = await fetch(
   `${API_URL}/api/notifications?userId=${userId}`
 );
