@@ -1404,7 +1404,7 @@ const response = await fetch(
       : "";
 
     return `
-      <div class="notification-item">
+    <div class="notification-item" style="${notification.read ? 'background: white;' : 'background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin-bottom: 8px;'}">
         🔔 ${escapeHTML(notification.message)}
         <br>
         <small>🕒 ${dataNotificacao}</small>
