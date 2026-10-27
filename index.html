@@ -1378,7 +1378,21 @@ const response = await fetch(
 
     const data = await response.json();
     
+if (data.success && data.notifications.length > 0) {
+  await fetch(`${API_URL}/api/notifications/read`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId: userId
+    })
+  });
 
+  data.notifications.forEach(notification => {
+    notification.read = true;
+  });
+}
     if (
   !data.success ||
   !data.notifications ||
