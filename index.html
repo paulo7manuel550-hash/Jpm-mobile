@@ -533,10 +533,13 @@
       </button>
 
       <button class="nav-btn"
-              onclick="showPage('notifications')">
-        <span>🔔</span>
-        Alertas
-      </button>
+        onclick="showPage('notifications')">
+  <span>🔔</span>
+  Alertas
+  <span id="notificationBadge"
+        style="display:none; background:red; color:white; border-radius:50%; padding:2px 7px; font-size:12px; font-weight:bold; margin-left:4px;">
+  </span>
+</button>
 
       <button class="nav-btn"
               onclick="showPage('profile')">
