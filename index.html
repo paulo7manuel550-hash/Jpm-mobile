@@ -1468,11 +1468,15 @@ if (data.success && data.notifications.length > 0) {
       : "";
 
     return `
-    <div class="notification-item" style="${notification.read ? 'background: white;' : 'background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin-bottom: 8px;'}">
-        🔔 ${escapeHTML(notification.message)}
-        <br>
-        <small>🕒 ${dataNotificacao}</small>
-      </div>
+    <div class="notification-item"
+     onclick="openNotification(${Number(notification.id)})"
+     style="cursor:pointer; ${notification.read ? 'background:white;' : 'background:#fff3cd; border-left:4px solid #ffc107; padding:10px; margin-bottom:8px;'}">
+
+  🔔 ${escapeHTML(notification.message)}
+  <br>
+  <small>🕒 ${dataNotificacao}</small>
+
+</div>
     `;
   }).join("");
 
