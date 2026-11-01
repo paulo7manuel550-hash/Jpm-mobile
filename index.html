@@ -784,7 +784,16 @@ console.log("UTILIZADOR LOGADO:", currentUser);
 
 loadPosts();
 
+// ATUALIZAR CONTADOR AUTOMATICAMENTE
 loadUnreadNotificationCount();
+
+if (window.notificationRefreshInterval) {
+  clearInterval(window.notificationRefreshInterval);
+}
+
+window.notificationRefreshInterval = setInterval(() => {
+  loadUnreadNotificationCount();
+}, 10000);
 
   } catch (error) {
 
