@@ -560,6 +560,7 @@ const API_URL =
   "https://jpm-backend-1.onrender.com";
 
 let currentUser = null;
+let viewingOtherProfile = false;
 
 
 /* ---------- TELAS ---------- */
@@ -1207,7 +1208,9 @@ async function loadPosts() {
 
 
       article.className =
-        "post";
+  "post";
+
+article.id = `post-${post.id}`;
 
 
       const initial =
@@ -1491,7 +1494,111 @@ if (data.success && data.notifications.length > 0) {
       "Não foi possível carregar as notificações.";
   }
 }
+  
+// ABRIR NOTIFICAÇÃO
+async function openNotification(notificationId) {
 
+  if (!currentUser) return;
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/notifications?userId=${currentUser.id}`
+    );
+
+    const data = await response.json();
+
+    if (!data.success) return;
+
+    const notification = data.notifications.find(
+      item => Number(item.id) === Number(notificationId)
+    );
+
+    if (!notification) return;
+
+    // NOTIFICAÇÃO DE NOVO SEGUIDOR
+    if (notification.type === "follow") {
+
+      showPage("profile");
+
+      const usersResponse = await fetch(
+        `${API_URL}/api/users?userId=${currentUser.id}`
+      );
+
+      const usersData = await usersResponse.json();
+
+      const followedUser = usersData.users.find(
+        user => Number(user.id) === Number(notification.fromUserId)
+      );
+
+      if (!followedUser) {
+        alert("Não foi possível encontrar esse utilizador.");
+        return;
+      }
+
+      document.getElementById("profileName").textContent =
+        followedUser.name;
+
+      document.getElementById("profilePhone").textContent =
+        followedUser.phone;
+
+      document.getElementById("profileAvatar").textContent =
+        followedUser.name.charAt(0).toUpperCase();
+
+      return;
+    }
+
+    // NOTIFICAÇÕES DE PUBLICAÇÕES E COMENTÁRIOS
+    if (
+      notification.type === "like" ||
+      notification.type === "comment" ||
+      notification.type === "comment_like"
+    ) {
+
+      showPage("home");
+
+      await loadPosts();
+
+      const postElement = document.getElementById(
+        `post-${notification.postId}`
+      );
+
+      if (!postElement) {
+        alert("Não foi possível encontrar a publicação.");
+        return;
+      }
+
+      postElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+      if (
+        notification.type === "comment" ||
+        notification.type === "comment_like"
+      ) {
+
+        const commentsBox = document.getElementById(
+          `comments-${notification.postId}`
+        );
+
+        if (commentsBox) {
+          commentsBox.classList.remove("hidden");
+          await loadComments(notification.postId);
+        }
+      }
+
+    }
+
+  } catch (error) {
+
+    console.log("Erro ao abrir notificação:", error);
+
+    alert("Não foi possível abrir esta notificação.");
+
+  }
+}
+  
 async function loadComments(postId) {
 
   const list = document.getElementById(
