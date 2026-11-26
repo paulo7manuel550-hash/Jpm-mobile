@@ -961,6 +961,79 @@ function focusPublisher() {
   }, 100);
 
 }
+  /* ---------- ABRIR PERFIL DE OUTRO UTILIZADOR ---------- */
+
+async function openUserProfile(userId) {
+
+  if (!currentUser) {
+    alert("Entra na tua conta primeiro.");
+    return;
+  }
+
+  const targetId = Number(userId);
+
+  if (!Number.isFinite(targetId)) {
+    alert("Utilizador inválido.");
+    return;
+  }
+
+  if (targetId === Number(currentUser.id)) {
+    viewingOtherProfile = false;
+    viewedProfileUserId = null;
+    showPage("profile");
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/users?userId=${currentUser.id}`
+    );
+
+    const data = await response.json();
+
+    if (!data.success || !data.users) {
+      alert("Não foi possível carregar o perfil.");
+      return;
+    }
+
+    const user = data.users.find(
+      item => Number(item.id) === targetId
+    );
+
+    if (!user) {
+      alert("Utilizador não encontrado.");
+      return;
+    }
+
+    viewingOtherProfile = true;
+    viewedProfileUserId = targetId;
+
+    document.getElementById("profileName").textContent =
+      user.name;
+
+    document.getElementById("profilePhone").textContent =
+      user.phone;
+
+    document.getElementById("profileAvatar").textContent =
+      user.name.charAt(0).toUpperCase();
+
+    document.getElementById("followersCount").textContent =
+      user.followersCount;
+
+    document.getElementById("followingCount").textContent =
+      user.followingCount;
+
+    showPage("profile");
+
+  } catch (error) {
+
+    console.log("Erro ao abrir perfil:", error);
+
+    alert("Erro de conexão com o servidor.");
+
+  }
+}
 
 
 /* ---------- PUBLICAR ---------- */
