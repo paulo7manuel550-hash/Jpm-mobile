@@ -1303,6 +1303,71 @@ article.id = `post-${post.id}`;
 
   }
 }
+  /* ---------- PUBLICAÇÕES DO PERFIL ---------- */
+
+async function loadProfilePosts(userId) {
+
+  const container =
+    document.getElementById("profilePostsContainer");
+
+  if (!container) return;
+
+  container.innerHTML = "A carregar publicações...";
+
+  try {
+
+    const response = await fetch(
+      `${API_URL}/api/posts?userId=${currentUser.id}`
+    );
+
+    const data = await response.json();
+
+    if (!data.success || !data.posts) {
+      container.innerHTML = "Não foi possível carregar as publicações.";
+      return;
+    }
+
+    const userPosts = data.posts.filter(
+      post => Number(post.userId) === Number(userId)
+    );
+
+    document.getElementById("postCount").textContent =
+      userPosts.length;
+
+    if (userPosts.length === 0) {
+      container.innerHTML =
+        "<div class='empty'>Este utilizador ainda não tem publicações.</div>";
+      return;
+    }
+
+    container.innerHTML = userPosts.map(post => {
+
+      const date = new Date(post.createdAt)
+        .toLocaleString("pt-PT");
+
+      return `
+        <div class="post">
+          <div class="post-content">
+            ${escapeHTML(post.content)}
+          </div>
+
+          <div class="post-date">
+            ${date}
+          </div>
+        </div>
+      `;
+
+    }).join("");
+
+  } catch (error) {
+
+    console.log("Erro ao carregar publicações do perfil:", error);
+
+    container.innerHTML =
+      "Erro ao carregar publicações.";
+
+  }
+}
 /* ---------- CURTIDAS ---------- */
 
 async function likePost(postId, button) {
