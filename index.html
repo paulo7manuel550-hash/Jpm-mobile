@@ -553,8 +553,9 @@
 const API_URL =
   "https://jpm-backend-1.onrender.com";
 
-let currentUser = null;
+  let currentUser = null;
 let viewingOtherProfile = false;
+let viewedProfileUserId = null;
 
 
 /* ---------- TELAS ---------- */
@@ -921,15 +922,30 @@ function showPage(page) {
       .classList.add("active");
 
   }
-
 if (page === "profile") {
-  updatePostCount();
-  loadFollowStats();
+
+  if (
+    viewingOtherProfile &&
+    viewedProfileUserId !== null
+  ) {
+
+    loadProfilePosts(viewedProfileUserId);
+
+  } else {
+
+    updatePostCount();
+    loadFollowStats();
+
+  }
+
 }
 
 if (page === "notifications") {
+
   loadNotifications();
+
 }
+  
 
 }
 
