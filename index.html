@@ -874,38 +874,45 @@ function showPage(page) {
     "notificationsPage"
   ];
 
+  const targetPage = document.getElementById(
+    page + "Page"
+  );
+
+  if (!targetPage) {
+    console.error("Página não encontrada:", page);
+    return;
+  }
 
   pages.forEach(id => {
 
-    document.getElementById(id)
-      .classList.add("hidden");
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.classList.add("hidden");
+    }
 
   });
 
-
-  document.getElementById(
-    page + "Page"
-  ).classList.remove("hidden");
-
+  targetPage.classList.remove("hidden");
 
   const titles = {
     home: "Início",
     profile: "Perfil",
     explore: "Explorar",
-    notifications: "Notificações"
+    notifications: "Alertas"
   };
 
+  const pageTitle = document.getElementById("pageTitle");
 
-  document.getElementById("pageTitle")
-    .textContent =
-    titles[page];
+  if (pageTitle) {
+    pageTitle.textContent = titles[page] || "JPM Mobile";
+  }
 
+  const navButtons = document.querySelectorAll(".nav-btn");
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(button =>
-      button.classList.remove("active")
-    );
-
+  navButtons.forEach(button => {
+    button.classList.remove("active");
+  });
 
   const index = {
     home: 0,
@@ -914,38 +921,31 @@ function showPage(page) {
     profile: 4
   };
 
-
-  if (index[page] !== undefined) {
-
-    document.querySelectorAll(".nav-btn")
-      [index[page]]
-      .classList.add("active");
-
+  if (index[page] !== undefined && navButtons[index[page]]) {
+    navButtons[index[page]].classList.add("active");
   }
-if (page === "profile") {
 
-  if (
-    viewingOtherProfile &&
-    viewedProfileUserId !== null
-  ) {
+  if (page === "profile") {
 
-    loadProfilePosts(viewedProfileUserId);
+    if (
+      viewingOtherProfile &&
+      viewedProfileUserId !== null
+    ) {
 
-  } else {
+      loadProfilePosts(viewedProfileUserId);
 
-    updatePostCount();
-    loadFollowStats();
+    } else {
+
+      updatePostCount();
+      loadFollowStats();
+
+    }
 
   }
 
-}
-
-if (page === "notifications") {
-
-  loadNotifications();
-
-}
-  
+  if (page === "notifications") {
+    loadNotifications();
+  }
 
 }
 
