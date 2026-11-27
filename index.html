@@ -418,52 +418,87 @@
 
 
     <!-- PERFIL -->
-    <div id="profilePage" class="content hidden">
+<div id="profilePage" class="content hidden">
 
-      <div class="profile">
+  <div class="profile">
 
-        <div class="profile-avatar" id="profileAvatar">
-          J
-        </div>
+    <!-- CAPA -->
+    <div class="profile-cover">
+      <span>JPM MOBILE</span>
+    </div>
 
-        <div class="profile-name" id="profileName">
-          Utilizador
-        </div>
+    <!-- FOTO DE PERFIL -->
+    <div class="profile-avatar" id="profileAvatar">
+      J
+    </div>
 
-        <div class="profile-phone" id="profilePhone">
-          -
-        </div>
+    <!-- INFORMAÇÕES -->
+    <div class="profile-name" id="profileName">
+      Utilizador
+    </div>
 
-        <div class="stats">
+    <div class="profile-phone" id="profilePhone">
+      -
+    </div>
 
-          <div class="stat">
-            <strong id="postCount">0</strong>
-            <span>Publicações</span>
-          </div>
+    <div class="profile-bio" id="profileBio">
+      Bem-vindo ao meu perfil JPM Mobile!
+    </div>
 
-          <div class="stat">
+    <!-- EDITAR PERFIL -->
+    <button
+      class="secondary"
+      onclick="editProfile()"
+    >
+      ✏️ Editar perfil
+    </button>
+
+    <!-- ESTATÍSTICAS -->
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="postCount">0</strong>
+        <span>Publicações</span>
+      </div>
+
+      <div class="stat">
         <strong id="followersCount">0</strong>
-<span>Seguidores</span>
-          </div>
+        <span>Seguidores</span>
+      </div>
 
-          <div class="stat">
-  <strong id="followingCount">0</strong>
-<span>A seguir</span>
-          </div>
-
-        <h3>Publicações</h3>
-<div id="profilePostsContainer"></div>
-
-<button class="secondary" onclick="loadUsersToFollow()">👤 Encontrar pessoas</button>
-<div id="usersToFollow" class="hidden"></div>
-
-        <button class="secondary" onclick="logout()">
-          Sair da conta
-        </button>
-
+      <div class="stat">
+        <strong id="followingCount">0</strong>
+        <span>A seguir</span>
       </div>
 
     </div>
+
+    <!-- PUBLICAÇÕES -->
+    <h3>Publicações</h3>
+
+    <div id="profilePostsContainer"></div>
+
+    <!-- ENCONTRAR PESSOAS -->
+    <button
+      class="secondary"
+      onclick="loadUsersToFollow()"
+    >
+      👤 Encontrar pessoas
+    </button>
+
+    <div id="usersToFollow" class="hidden"></div>
+
+    <!-- TERMINAR SESSÃO -->
+    <button
+      class="secondary"
+      onclick="logout()"
+    >
+      Sair da conta
+    </button>
+
+  </div>
+
+</div>
 
 
     <!-- EXPLORAR -->
