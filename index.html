@@ -1304,84 +1304,73 @@ article.id = `post-${post.id}`;
 
       article.innerHTML = `
 
-        <div class="post-header">
+  <div class="post-header">
 
-        <div class="post-content">
-  ${escapeHTML(post.content)}
-</div>
+    <div
+      class="author"
+      onclick="openUserProfile(${Number(post.userId)})"
+      style="cursor:pointer;"
+    >
+      ${escapeHTML(post.author)}
+    </div>
 
-<div class="post-actions">
+    <div class="post-date">
+      ${new Date(post.createdAt).toLocaleString("pt-PT")}
+    </div>
 
-  <button
-  onclick="likePost(${post.id}, this)"
-  class="like-button ${post.liked ? "liked" : ""}"
->
-  ${post.liked ? "❤️ Curtido" : "❤️ Curtir"}
-  <span>${post.likes || 0}</span>
-</button>
-
-  <button
-    onclick="toggleComments(${post.id})"
-    class="comment-button"
-  >
-    💬 Comentários
-  </button>
-
-</div>
-
-<div
-  id="comments-${post.id}"
-  class="comments-box hidden"
->
-
-  <div id="comment-list-${post.id}">
-    A carregar comentários...
   </div>
 
-  <div class="comment-form">
+  <div class="post-content">
+    ${escapeHTML(post.content)}
+  </div>
 
-    <input
-      id="comment-input-${post.id}"
-      type="text"
-      placeholder="Escreva um comentário..."
-    />
+  <div class="post-actions">
 
     <button
-      onclick="addComment(${post.id})"
+      onclick="likePost(${post.id}, this)"
+      class="like-button ${post.liked ? "liked" : ""}"
     >
-      Enviar
+      ${post.liked ? "❤️ Curtido" : "❤️ Curtir"}
+      <span>${post.likes || 0}</span>
+    </button>
+
+    <button
+      onclick="toggleComments(${post.id})"
+      class="comment-button"
+    >
+      💬 Comentários
     </button>
 
   </div>
 
-</div>
-
-<div>
   <div
-    class="author"
-    onclick="openUserProfile(${Number(post.userId)})"
-    style="cursor:pointer;"
+    id="comments-${post.id}"
+    class="comments-box hidden"
   >
-    ${escapeHTML(post.author)}
+
+    <div id="comment-list-${post.id}">
+      A carregar comentários...
+    </div>
+
+    <div class="comment-form">
+
+      <input
+        id="comment-input-${post.id}"
+        type="text"
+        placeholder="Escreva um comentário..."
+      />
+
+      <button onclick="addComment(${post.id})">
+        Enviar
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="post-date">
-    ${new Date(post.createdAt)
-      .toLocaleString("pt-PT")}
-  </div>
-</div>
+`;
 
-
-        </div>
-
-        <div class="post-content">
-          ${escapeHTML(post.content)}
-        </div>
-
-      `;
-
-
-      container.appendChild(article);
+container.appendChild(article);
 
     });
 
